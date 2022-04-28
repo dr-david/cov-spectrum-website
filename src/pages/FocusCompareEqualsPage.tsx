@@ -18,6 +18,7 @@ import { Utils } from '../services/Utils';
 import { useDeepCompareMemo } from '../helpers/deep-compare-hooks';
 import { DivisionModal } from '../components/DivisionModal';
 import { createDivisionBreakdownButton } from './FocusSinglePage';
+import { SvgVennDiagram4 } from '../components/SvgVennDiagram4';
 
 export const FocusCompareEqualsPage = () => {
   const exploreUrl = useExploreUrl()!;
@@ -137,12 +138,20 @@ export const FocusCompareEqualsPage = () => {
               </NamedCard>
             </GridCell>
           )}
-          {ldvsSelectors.length === 2 && (
+          {ldvsSelectors.length === 2 ? (
             <GridCell minWidth={600}>
               <NamedCard title='Amino acid changes'>
                 <VariantMutationComparison selectors={ldvsSelectors} />
               </NamedCard>
             </GridCell>
+          ) : ldvsSelectors.length === 4 ? (
+            <GridCell minWidth={600}>
+              <NamedCard title='Amino acid changes'>
+                <SvgVennDiagram4 selectors={ldvsSelectors} />
+              </NamedCard>
+            </GridCell>
+          ) : (
+            ''
           )}
         </PackedGrid>
       </div>
